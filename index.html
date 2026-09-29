@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TVIliria</title>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+body {
+margin: 0;
+background: #000;
+color: white;
+font-family: Arial, sans-serif;
+text-align: center;
+}
+
+h1 {
+margin: 20px 0;
+}
+
+.player {
+width: 100%;
+max-width: 1280px;
+margin: auto;
+background: #000;
+}
+
+video {
+width: 100%;
+aspect-ratio: 16 / 9;
+background: #000;
+display: block;
+}
+</style>
+</head>
+
+<body>
+
+<h1>TVIliria</h1>
+
+<div class="player">
+<video
+id="video"
+controls
+autoplay
+playsinline>
+</video>
+</div>
+
+<script>
+const video = document.getElementById("video");
+const streamURL = "/api/test";
+
+if (Hls.isSupported()) {
+
+const hls = new Hls({
+enableWorker: true,
+lowLatencyMode: true
+});
+
+hls.loadSource(streamURL);
+hls.attachMedia(video);
+
+hls.on(Hls.Events.MANIFEST_PARSED, function () {
+video.play().catch(() => {});
+});
+
+hls.on(Hls.Events.ERROR, function (event, data) {
+console.log("HLS ERROR:", data);
+});
+
+} else if (
+video.canPlayType("application/vnd.apple.mpegurl")
+) {
+
+video.src = streamURL;
+
+video.addEventListener("loadedmetadata", function () {
+video.play().catch(() => {});
+});
+}
+</script>
+
+</body>
+</html>
