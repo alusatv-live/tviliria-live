@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +26,6 @@ margin: 20px 0;
 width: 100%;
 max-width: 1280px;
 margin: auto;
-background: #000;
 }
 
 video {
@@ -33,6 +33,12 @@ width: 100%;
 aspect-ratio: 16 / 9;
 background: #000;
 display: block;
+}
+
+#status {
+margin: 15px;
+padding: 10px;
+font-size: 16px;
 }
 </style>
 </head>
@@ -42,19 +48,26 @@ display: block;
 <h1>TVIliria</h1>
 
 <div class="player">
-<video
-id="video"
-controls
-autoplay
-playsinline>
-</video>
+<video id="video" controls playsinline></video>
 </div>
+
+<div id="status">Po kontrollojmë stream-in...</div>
 
 <script>
 const video = document.getElementById("video");
+const status = document.getElementById("status");
+
+const streamURL =
 "https://lbgo.bozztv.com/ssh101/ssh101/albanianusa/chunks.m3u8?lb_backend_hint=7";
 
+function show(message) {
+status.textContent = message;
+console.log(message);
+}
+
 if (Hls.isSupported()) {
+
+show("HLS.js u gjet. Po lidhemi me stream-in...");
 
 const hls = new Hls({
 enableWorker: true,
@@ -64,23 +77,42 @@ lowLatencyMode: true
 hls.loadSource(streamURL);
 hls.attachMedia(video);
 
+hls.on(Hls.Events.MANIFEST_LOADING, function () {
+show("Po ngarkohet lista e stream-it...");
+});
+
 hls.on(Hls.Events.MANIFEST_PARSED, function () {
-video.play().catch(() => {});
+show("Stream-i u gjet. Shtyp PLAY.");
 });
 
 hls.on(Hls.Events.ERROR, function (event, data) {
-console.log("HLS ERROR:", data);
+show(
+"HLS ERROR: " +
+data.type +
+" / " +
+data.details
+);
 });
 
 } else if (
 video.canPlayType("application/vnd.apple.mpegurl")
 ) {
 
+show("Browser-i përdor HLS direkt.");
+
 video.src = streamURL;
 
 video.addEventListener("loadedmetadata", function () {
-video.play().catch(() => {});
+show("Stream-i u ngarkua. Shtyp PLAY.");
 });
+
+video.addEventListener("error", function () {
+show("Gabim në ngarkimin e videos.");
+});
+
+} else {
+
+show("Ky browser nuk mbështet HLS.");
 }
 </script>
 
