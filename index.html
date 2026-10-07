@@ -4,8 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TVIliria LIVE - Lajmet e Fundit</title>
+
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
 
 * {
@@ -85,7 +88,7 @@ background: #d00000;
 color: white;
 font-size: 40px;
 cursor: pointer;
-box-shadow: 0 0 25px rgba(0,0,0,0.6);
+z-index: 10;
 }
 
 .status {
@@ -170,17 +173,9 @@ border-radius: 6px;
 font-size: 14px;
 }
 
-.read-button:hover {
-background: #f0c400;
-}
-
 .read-button.red {
 background: #d00000;
 color: white;
-}
-
-.read-button.red:hover {
-background: #ed0000;
 }
 
 footer {
@@ -225,67 +220,114 @@ font-size: 32px;
 
 </style>
 </head>
+
 <body>
+
 <header>
+
 <div class="logo">
 TV<span>Iliria</span>
 </div>
+
 <div class="tagline">
 Zëri i shqiptarëve në Amerikë
 </div>
+
 <div class="live-label">
 🔴 LIVE TV
 </div>
+
 </header>
+
+
 <div class="player">
+
+<video
+id="video"
+controls
+muted
+playsinline
+preload="auto">
+</video>
+
 <button id="playButton" class="playButton">
 ▶
 </button>
+
 </div>
+
+
 <div id="status" class="status">
 Shtyp ▶ për të parë TVIliria LIVE
 </div>
+
+
 <section class="section">
+
 <a href="lajmet.html" class="section-title">
 📰 LAJMET E FUNDIT
 </a>
+
 <div class="news-intro">
 Lajmet, reportazhet dhe informacionet më të fundit nga Shqipëria, Kosova, trevat shqiptare dhe diaspora.
 </div>
+
+
 <div class="news-grid">
+
+
 <div class="news-card">
+
 <div class="news-date">
 6 Tetor 2026
 </div>
+
 <h2>
 Lajmi i parë nga TVIliria
 </h2>
+
 <p>
 TVIliria sjell informacionet më të fundit për komunitetin shqiptar në Amerikë dhe diasporë.
 </p>
+
 <a href="lajmi1.html" class="read-button">
 LEXO MË SHUMË →
 </a>
+
 </div>
+
+
 <div class="news-card">
+
 <div class="news-date">
 6 Tetor 2026
 </div>
+
 <h2>
 Lajm i ri nga TVIliria
 </h2>
+
 <p>
 TVIliria do të sjellë vazhdimisht lajme, reportazhe dhe informacione të reja nga Shqipëria dhe diaspora.
 </p>
+
 <a href="news/lajmi2.html" class="read-button red">
 LEXO MË SHUMË →
 </a>
+
 </div>
+
+
 </div>
+
 </section>
+
+
 <footer>
 © 2026 TVIliria — Albanian Media in America
 </footer>
+
+
 <script>
 
 const video = document.getElementById("video");
@@ -296,67 +338,53 @@ const streamURL = "/api/proxy";
 
 let hls = null;
 
-playButton.addEventListener("click", async function () {
 
-playButton.style.display = "none";
+playButton.addEventListener("click", function () {
 
 status.textContent = "Po lidhemi me TVIliria LIVE...";
 
-if (video.canPlayType("application/vnd.apple.mpegurl")) {
-
-video.src = streamURL;
-
-try {
-
-await video.play();
-
-status.textContent = "🔴 TVIliria LIVE";
-
-} catch (error) {
-
-status.textContent =
-"Shtyp Play te kontrollet e videos.";
-
-playButton.style.display = "block";
-
-}
-
-return;
-}
+playButton.style.display = "none";
 
 
 if (Hls.isSupported()) {
 
+if (hls) {
+hls.destroy();
+}
+
 hls = new Hls({
 enableWorker: true,
-lowLatencyMode: true,
-maxBufferLength: 10
+lowLatencyMode: false,
+maxBufferLength: 20,
+maxMaxBufferLength: 30,
+liveSyncDurationCount: 3
 });
-
-hls.loadSource(streamURL);
 
 hls.attachMedia(video);
 
+hls.on(Hls.Events.MEDIA_ATTACHED, function () {
 
-hls.on(Hls.Events.MANIFEST_PARSED, async function () {
-
-try {
-
-await video.play();
-
-status.textContent = "🔴 TVIliria LIVE";
-
-} catch (error) {
-
-status.textContent =
-"Shtyp Play te kontrollet e videos.";
-
-playButton.style.display = "block";
-
-}
+hls.loadSource(streamURL);
 
 });
 
+hls.on(Hls.Events.MANIFEST_PARSED, function () {
+
+video.play()
+.then(function () {
+
+status.textContent = "🔴 TVIliria LIVE";
+
+})
+.catch(function () {
+
+status.textContent = "Shtyp ▶ te videoja për të nisur LIVE.";
+
+playButton.style.display = "block";
+
+});
+
+});
 
 hls.on(Hls.Events.ERROR, function (event, data) {
 
@@ -375,6 +403,32 @@ return;
 }
 
 
+if (video.canPlayType("application/vnd.apple.mpegurl")) {
+
+video.src = streamURL;
+
+video.addEventListener("loadedmetadata", function () {
+
+video.play()
+.then(function () {
+
+status.textContent = "🔴 TVIliria LIVE";
+
+})
+.catch(function () {
+
+status.textContent = "Shtyp ▶ te videoja për të nisur LIVE.";
+
+playButton.style.display = "block";
+
+});
+
+}, { once: true });
+
+return;
+}
+
+
 status.textContent =
 "Shfletuesi nuk mbështet këtë LIVE stream.";
 
@@ -382,6 +436,33 @@ playButton.style.display = "block";
 
 });
 
+
+video.addEventListener("play", function () {
+
+playButton.style.display = "none";
+
+status.textContent = "🔴 TVIliria LIVE";
+
+});
+
+
+video.addEventListener("pause", function () {
+
+if (!video.ended) {
+status.textContent = "LIVE është ndalur. Shtyp Play.";
+}
+
+});
+
+
+video.addEventListener("error", function () {
+
+status.textContent =
+"Problem me lidhjen e videos LIVE.";
+
+});
+
 </script>
+
 </body>
 </html>
