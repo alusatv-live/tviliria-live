@@ -72,10 +72,6 @@ text-decoration: none;
 border-radius: 6px;
 }
 
-.articles-button:hover {
-background: #f0c400;
-}
-
 footer {
 padding: 25px;
 color: #777;
@@ -93,7 +89,7 @@ TV<span>Iliria</span> LIVE
 </header>
 
 <div class="player">
-<video id="video" controls playsinline></video>
+<video id="video" controls autoplay muted playsinline></video>
 </div>
 
 <div id="status" class="status">
@@ -109,19 +105,21 @@ Po lidhemi me TVIliria LIVE...
 </footer>
 
 <script>
-
 const video = document.getElementById("video");
 const status = document.getElementById("status");
 
 const streamURL =
 "https://lbgo.bozztv.com/ssh101/ssh101/albanianusa/chunks.m3u8?lb_backend_hint=7";
 
+function startLive() {
+
 if (video.canPlayType("application/vnd.apple.mpegurl")) {
 
 video.src = streamURL;
 
-video.addEventListener("loadedmetadata", function() {
+video.addEventListener("loadedmetadata", function () {
 status.textContent = "🔴 TVIliria LIVE";
+video.play().catch(() => {});
 });
 
 } else if (Hls.isSupported()) {
@@ -134,21 +132,25 @@ lowLatencyMode: true
 hls.loadSource(streamURL);
 hls.attachMedia(video);
 
-hls.on(Hls.Events.MANIFEST_PARSED, function() {
+hls.on(Hls.Events.MANIFEST_PARSED, function () {
 status.textContent = "🔴 TVIliria LIVE";
+video.play().catch(() => {});
 });
 
-hls.on(Hls.Events.ERROR, function(event, data) {
+hls.on(Hls.Events.ERROR, function (event, data) {
 if (data.fatal) {
-status.textContent = "Po përpiqemi të rilidhemi me TVIliria LIVE...";
+status.textContent =
+"Po përpiqemi të rilidhemi me TVIliria LIVE...";
 }
 });
 
 } else {
-
-status.textContent = "Shfletuesi nuk mbështet LIVE TV.";
+status.textContent =
+"Shfletuesi nuk mbështet LIVE TV.";
+}
 }
 
+startLive();
 </script>
 
 </body>
