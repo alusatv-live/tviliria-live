@@ -16,34 +16,54 @@ box-sizing: border-box;
 
 body {
 margin: 0;
-background: #000;
+background: #050505;
 color: white;
 font-family: Arial, sans-serif;
-text-align: center;
 }
 
 header {
-padding: 18px 10px;
-background: #111;
-border-bottom: 2px solid #c40000;
+background: linear-gradient(135deg, #111, #1b1b1b);
+padding: 20px 10px;
+text-align: center;
+border-bottom: 3px solid #c40000;
 }
 
 .logo {
-font-size: 30px;
+font-size: 34px;
 font-weight: bold;
+letter-spacing: 1px;
 }
 
 .logo span {
 color: #e00000;
 }
 
+.tagline {
+margin-top: 6px;
+color: #aaa;
+font-size: 14px;
+}
+
+.live-label {
+display: inline-block;
+margin-top: 10px;
+background: #d00000;
+padding: 7px 14px;
+border-radius: 20px;
+font-size: 13px;
+font-weight: bold;
+}
+
 .player {
 width: 100%;
 max-width: 1000px;
-margin: 20px auto 10px;
+margin: 22px auto 10px;
 aspect-ratio: 16 / 9;
 background: #000;
 position: relative;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 0 20px rgba(255,0,0,0.15);
 }
 
 video {
@@ -59,25 +79,30 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-width: 90px;
-height: 90px;
+width: 88px;
+height: 88px;
 border-radius: 50%;
-border: none;
+border: 3px solid white;
 background: #d00000;
 color: white;
-font-size: 42px;
+font-size: 40px;
 cursor: pointer;
 }
 
 .status {
+text-align: center;
 padding: 12px;
 color: #aaa;
 }
 
+.buttons {
+text-align: center;
+padding: 5px 15px 25px;
+}
+
 .articles-button {
 display: inline-block;
-margin: 15px auto 30px;
-padding: 13px 20px;
+padding: 13px 22px;
 background: #d4af00;
 color: #000;
 font-weight: bold;
@@ -85,10 +110,45 @@ text-decoration: none;
 border-radius: 6px;
 }
 
+.section {
+width: 92%;
+max-width: 1000px;
+margin: 10px auto 35px;
+}
+
+.section-title {
+border-left: 5px solid #d00000;
+padding: 10px 14px;
+background: #111;
+font-size: 21px;
+font-weight: bold;
+}
+
+.news-card {
+margin-top: 12px;
+background: #111;
+border: 1px solid #292929;
+border-radius: 7px;
+padding: 18px;
+}
+
+.news-card h2 {
+margin: 0 0 8px;
+font-size: 20px;
+}
+
+.news-card p {
+margin: 0;
+color: #aaa;
+line-height: 1.6;
+}
+
 footer {
-padding: 25px;
+padding: 28px 15px;
+text-align: center;
 color: #777;
 border-top: 1px solid #222;
+background: #080808;
 }
 </style>
 </head>
@@ -96,9 +156,19 @@ border-top: 1px solid #222;
 <body>
 
 <header>
+
 <div class="logo">
-TV<span>Iliria</span> LIVE
+TV<span>Iliria</span>
 </div>
+
+<div class="tagline">
+Zëri i shqiptarëve në Amerikë
+</div>
+
+<div class="live-label">
+🔴 LIVE TV
+</div>
+
 </header>
 
 <div class="player">
@@ -121,9 +191,34 @@ preload="none">
 Shtyp ▶ për të parë TVIliria LIVE
 </div>
 
+<div class="buttons">
+
 <a href="artikuj.html" class="articles-button">
 📰 ARTIKUJT TVILIRIA
 </a>
+
+</div>
+
+<section class="section">
+
+<div class="section-title">
+LAJMET E FUNDIT
+</div>
+
+<div class="news-card">
+
+<h2>
+TVIliria sjell lajme dhe reportazhe nga Shqipëria dhe diaspora
+</h2>
+
+<p>
+Ndiqni TVIliria për lajme, reportazhe dhe histori nga komuniteti
+shqiptar në Amerikë dhe nga trevat shqiptare.
+</p>
+
+</div>
+
+</section>
 
 <footer>
 © 2026 TVIliria — Albanian Media in America
@@ -135,8 +230,7 @@ const video = document.getElementById("video");
 const playButton = document.getElementById("playButton");
 const status = document.getElementById("status");
 
-const streamURL =
-"/api/proxy";
+const streamURL = "/api/proxy";
 
 let hls = null;
 
@@ -145,27 +239,27 @@ playButton.addEventListener("click", async function () {
 playButton.style.display = "none";
 status.textContent = "Po lidhemi me TVIliria LIVE...";
 
-/*
-* Safari / iPhone / iPad
-*/
 if (video.canPlayType("application/vnd.apple.mpegurl")) {
 
 video.src = streamURL;
 
 try {
+
 await video.play();
+
 status.textContent = "🔴 TVIliria LIVE";
+
 } catch (error) {
-status.textContent = "Shtyp Play te kontrollet e videos.";
+
+status.textContent =
+"Shtyp Play te kontrollet e videos.";
+
 playButton.style.display = "block";
 }
 
 return;
 }
 
-/*
-* Chrome / Edge / Firefox
-*/
 if (Hls.isSupported()) {
 
 hls = new Hls({
@@ -180,11 +274,16 @@ hls.attachMedia(video);
 hls.on(Hls.Events.MANIFEST_PARSED, async function () {
 
 try {
+
 await video.play();
+
 status.textContent = "🔴 TVIliria LIVE";
+
 } catch (error) {
+
 status.textContent =
 "Shtyp Play te kontrollet e videos.";
+
 playButton.style.display = "block";
 }
 
@@ -193,8 +292,10 @@ playButton.style.display = "block";
 hls.on(Hls.Events.ERROR, function (event, data) {
 
 if (data.fatal) {
+
 status.textContent =
 "Nuk u lidh me TVIliria LIVE. Provo përsëri.";
+
 playButton.style.display = "block";
 }
 
@@ -207,6 +308,7 @@ status.textContent =
 "Shfletuesi nuk mbështet këtë LIVE stream.";
 
 playButton.style.display = "block";
+
 });
 
 </script>
