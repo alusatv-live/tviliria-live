@@ -19,16 +19,18 @@ color: white;
 font-family: Arial, sans-serif;
 }
 
+/* HEADER */
 header {
-background: #111;
-border-bottom: 3px solid #c40000;
-padding: 20px 10px;
+background: linear-gradient(135deg, #080808, #1b1b1b);
+padding: 22px 15px;
 text-align: center;
+border-bottom: 3px solid #c40000;
 }
 
 .logo {
-font-size: 32px;
+font-size: 36px;
 font-weight: bold;
+letter-spacing: 1px;
 }
 
 .logo span {
@@ -41,66 +43,83 @@ margin-top: 6px;
 font-size: 14px;
 }
 
-.container {
-width: 92%;
-max-width: 1000px;
-margin: 25px auto;
+/* NAV */
+.nav {
+text-align: center;
+padding: 15px 10px;
+background: #0d0d0d;
+border-bottom: 1px solid #222;
 }
 
-.back {
+.live {
 display: inline-block;
-margin-bottom: 20px;
-padding: 10px 16px;
 background: #d00000;
 color: white;
-text-decoration: none;
+padding: 10px 20px;
 border-radius: 5px;
+text-decoration: none;
 font-weight: bold;
 }
 
-.title {
-border-left: 5px solid #d00000;
-padding: 10px 14px;
-background: #111;
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 18px;
+/* CONTAINER */
+.container {
+width: 94%;
+max-width: 1050px;
+margin: 25px auto 50px;
 }
 
+.page-title {
+font-size: 27px;
+font-weight: bold;
+border-left: 6px solid #d00000;
+padding: 12px 15px;
+background: linear-gradient(90deg, #151515, #0b0b0b);
+margin-bottom: 22px;
+}
+
+/* NEWS CARD */
 .news {
-background: #111;
+background: linear-gradient(145deg, #151515, #0b0b0b);
 border: 1px solid #292929;
-border-radius: 8px;
-padding: 20px;
-margin-bottom: 18px;
+border-radius: 10px;
+padding: 22px;
+margin-bottom: 20px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.35);
 }
 
 .news h2 {
-margin: 0 0 8px;
-font-size: 21px;
+margin: 0 0 10px;
+font-size: 23px;
+line-height: 1.3;
 }
 
 .date {
 color: #d4af00;
 font-size: 14px;
-margin-bottom: 14px;
+font-weight: bold;
+margin-bottom: 15px;
 }
 
 .summary {
 color: #ccc;
-line-height: 1.6;
+line-height: 1.7;
+font-size: 16px;
 }
 
 .full {
 display: none;
-margin-top: 18px;
+margin-top: 20px;
+padding-top: 18px;
+border-top: 1px solid #333;
 color: #ddd;
 line-height: 1.8;
+font-size: 16px;
 }
 
+/* BUTTON */
 .read {
 margin-top: 18px;
-padding: 11px 18px;
+padding: 12px 20px;
 background: #d4af00;
 color: #000;
 border: none;
@@ -109,12 +128,34 @@ font-weight: bold;
 cursor: pointer;
 }
 
+.read:hover {
+background: #f0c800;
+}
+
+/* FOOTER */
 footer {
-margin-top: 40px;
-padding: 25px;
+padding: 30px 15px;
 text-align: center;
 color: #777;
 border-top: 1px solid #222;
+background: #080808;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+
+.logo {
+font-size: 30px;
+}
+
+.page-title {
+font-size: 22px;
+}
+
+.news h2 {
+font-size: 20px;
+}
+
 }
 </style>
 </head>
@@ -133,13 +174,17 @@ Zëri i shqiptarëve në Amerikë
 
 </header>
 
-<div class="container">
+<div class="nav">
 
-<a href="index.html" class="back">
+<a href="index.html" class="live">
 🔴 LIVE TV
 </a>
 
-<div class="title">
+</div>
+
+<div class="container">
+
+<div class="page-title">
 📰 LAJMET E FUNDIT
 </div>
 
@@ -198,7 +243,7 @@ ${news.titulli}
 </h2>
 
 <div class="date">
-${news.data}
+📅 ${news.data}
 </div>
 
 <div class="summary">
@@ -226,6 +271,7 @@ article.querySelector(".full");
 button.addEventListener("click", function() {
 
 full.style.display = "block";
+
 button.style.display = "none";
 
 });
