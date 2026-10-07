@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sq">
 <head>
@@ -7,75 +8,104 @@
 <title>Artikujt TVIliria</title>
 
 <style>
+* {
+box-sizing: border-box;
+}
+
 body {
 margin: 0;
-background: #0b0b0b;
-color: white;
+background: #000;
+color: #fff;
 font-family: Arial, sans-serif;
 }
 
 header {
 background: #111;
-padding: 20px;
+border-bottom: 2px solid #c40000;
+padding: 18px;
 text-align: center;
-border-bottom: 2px solid #c9a227;
 }
 
-header h1 {
-margin: 0;
+.logo {
 font-size: 30px;
-}
-
-header p {
-margin: 8px 0 0;
-color: #c9a227;
-}
-
-.container {
-max-width: 900px;
-margin: auto;
-padding: 20px;
-}
-
-.article {
-background: #151515;
-margin-bottom: 20px;
-border-radius: 10px;
-overflow: hidden;
-border: 1px solid #333;
-}
-
-.article-content {
-padding: 20px;
-}
-
-.article h2 {
-margin-top: 0;
-font-size: 24px;
-}
-
-.date {
-color: #aaa;
-font-size: 14px;
-margin-bottom: 12px;
-}
-
-.read {
-display: inline-block;
-margin-top: 10px;
-padding: 10px 16px;
-background: #c9a227;
-color: #000;
-text-decoration: none;
-border-radius: 6px;
 font-weight: bold;
 }
 
-.back {
+.logo span {
+color: #e00000;
+}
+
+nav {
+text-align: center;
+padding: 15px;
+background: #111;
+}
+
+.live {
 display: inline-block;
-margin-bottom: 20px;
-color: #c9a227;
+background: #d00000;
+color: #fff;
+padding: 10px 18px;
+border-radius: 5px;
 text-decoration: none;
+font-weight: bold;
+}
+
+.container {
+width: 92%;
+max-width: 900px;
+margin: 30px auto;
+}
+
+.article {
+background: #111;
+padding: 25px;
+border-radius: 8px;
+border: 1px solid #333;
+}
+
+.article h1 {
+color: #fff;
+font-size: 28px;
+margin-top: 0;
+}
+
+.date {
+color: #d4af00;
+margin-bottom: 20px;
+}
+
+.summary {
+color: #ccc;
+font-size: 18px;
+line-height: 1.6;
+}
+
+.fullArticle {
+display: none;
+margin-top: 25px;
+color: #ddd;
+font-size: 17px;
+line-height: 1.8;
+}
+
+.readButton {
+margin-top: 20px;
+padding: 12px 20px;
+border: 0;
+border-radius: 5px;
+background: #d4af00;
+color: #000;
+font-weight: bold;
+cursor: pointer;
+}
+
+footer {
+margin-top: 50px;
+padding: 25px;
+text-align: center;
+color: #777;
+border-top: 1px solid #222;
 }
 </style>
 </head>
@@ -83,32 +113,84 @@ text-decoration: none;
 <body>
 
 <header>
-<h1>TVIliria</h1>
-<p>📰 Artikujt TVIliria</p>
+<div class="logo">
+TV<span>Iliria</span>
+</div>
 </header>
+
+<nav>
+<a class="live" href="/">
+🔴 LIVE TV
+</a>
+</nav>
 
 <div class="container">
 
-<a class="back" href="index.html">← Kthehu te LIVE TV</a>
-
 <div class="article">
-<div class="article-content">
-<h2>Mirë se vini te Artikujt TVIliria</h2>
+
+<h1>
+TVIliria sjell lajmet dhe zërin e shqiptarëve në Amerikë
+</h1>
 
 <div class="date">
-TVIliria • 30 Shtator 2026
+5 Tetor 2026
 </div>
+
+<div class="summary">
+TVIliria vazhdon misionin e saj për të informuar komunitetin shqiptar
+në Amerikë dhe për të sjellë lajme, reportazhe dhe histori nga Shqipëria
+dhe diaspora.
+</div>
+
+<button class="readButton" onclick="showArticle()" id="button">
+Lexo më shumë
+</button>
+
+<div class="fullArticle" id="fullArticle">
 
 <p>
-Kjo është hapësira e re e TVIliria për artikujt,
-lajmet dhe reportazhet tona.
+TVIliria është një media shqiptare që prej vitesh i shërben
+komunitetit shqiptar në Shtetet e Bashkuara.
 </p>
 
-<a class="read" href="#">Lexo më shumë</a>
-</div>
+<p>
+Përmes transmetimeve LIVE, lajmeve dhe reportazheve, TVIliria
+synon të mbajë të lidhur shqiptarët me zhvillimet në Shqipëri,
+Kosovë, trevat shqiptare dhe diasporë.
+</p>
+
+<p>
+Platforma jonë do të vazhdojë të zgjerohet me lajme të reja,
+reportazhe nga terreni dhe materiale të përgatitura nga
+redaksia e TVIliria.
+</p>
+
+<p>
+Ndiqni TVIliria LIVE dhe qëndroni me ne për lajmet dhe historitë
+më të fundit.
+</p>
+
 </div>
 
 </div>
+
+</div>
+
+<footer>
+© 2026 TVIliria — Albanian Media in America
+</footer>
+
+<script>
+
+function showArticle() {
+
+document.getElementById("fullArticle").style.display = "block";
+
+document.getElementById("button").style.display = "none";
+
+}
+
+</script>
 
 </body>
 </html>
