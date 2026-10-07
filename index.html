@@ -55,6 +55,13 @@ font-size: 13px;
 font-weight: bold;
 }
 
+.date-time {
+margin-top: 10px;
+color: #d4af00;
+font-size: 14px;
+font-weight: bold;
+}
+
 .player {
 width: 100%;
 max-width: 1000px;
@@ -236,7 +243,9 @@ Zëri i shqiptarëve në Amerikë
 <div class="live-label">
 🔴 LIVE TV
 </div>
+
 <div id="dateTime" class="date-time"></div>
+
 </header>
 
 
@@ -278,8 +287,7 @@ Lajmet, reportazhet dhe informacionet më të fundit nga Shqipëria, Kosova, tre
 
 <div class="news-card">
 
-<div class="news-date">
-6 Tetor 2026
+<div class="news-date" id="newsDate1">
 </div>
 
 <h2>
@@ -299,8 +307,7 @@ LEXO MË SHUMË →
 
 <div class="news-card">
 
-<div class="news-date">
-6 Tetor 2026
+<div class="news-date" id="newsDate2">
 </div>
 
 <h2>
@@ -338,6 +345,45 @@ const streamURL = "/api/proxy";
 
 let hls = null;
 
+
+/* DATA DHE ORA AUTOMATIKE */
+
+function updateDateTime() {
+
+const now = new Date();
+
+const date = now.toLocaleDateString("sq-AL", {
+day: "2-digit",
+month: "long",
+year: "numeric",
+timeZone: "America/Chicago"
+});
+
+const time = now.toLocaleTimeString("sq-AL", {
+hour: "2-digit",
+minute: "2-digit",
+second: "2-digit",
+hour12: false,
+timeZone: "America/Chicago"
+});
+
+document.getElementById("dateTime").textContent =
+"📅 " + date + " • 🕐 " + time;
+
+document.getElementById("newsDate1").textContent =
+date;
+
+document.getElementById("newsDate2").textContent =
+date;
+
+}
+
+updateDateTime();
+
+setInterval(updateDateTime, 1000);
+
+
+/* LIVE TV */
 
 playButton.addEventListener("click", function () {
 
@@ -378,7 +424,8 @@ status.textContent = "🔴 TVIliria LIVE";
 })
 .catch(function () {
 
-status.textContent = "Shtyp ▶ te videoja për të nisur LIVE.";
+status.textContent =
+"Shtyp ▶ te videoja për të nisur LIVE.";
 
 playButton.style.display = "block";
 
@@ -417,7 +464,8 @@ status.textContent = "🔴 TVIliria LIVE";
 })
 .catch(function () {
 
-status.textContent = "Shtyp ▶ te videoja për të nisur LIVE.";
+status.textContent =
+"Shtyp ▶ te videoja për të nisur LIVE.";
 
 playButton.style.display = "block";
 
@@ -449,7 +497,10 @@ status.textContent = "🔴 TVIliria LIVE";
 video.addEventListener("pause", function () {
 
 if (!video.ended) {
-status.textContent = "LIVE është ndalur. Shtyp Play.";
+
+status.textContent =
+"LIVE është ndalur. Shtyp Play.";
+
 }
 
 });
