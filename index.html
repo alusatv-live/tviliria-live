@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TVIliria LIVE</title>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -16,7 +17,7 @@ box-sizing: border-box;
 body {
 margin: 0;
 background: #000;
-color: #fff;
+color: white;
 font-family: Arial, sans-serif;
 text-align: center;
 }
@@ -48,6 +49,7 @@ position: relative;
 video {
 width: 100%;
 height: 100%;
+display: block;
 background: #000;
 object-fit: contain;
 }
@@ -60,16 +62,11 @@ transform: translate(-50%, -50%);
 width: 90px;
 height: 90px;
 border-radius: 50%;
-border: 0;
-background: #d40000;
+border: none;
+background: #d00000;
 color: white;
 font-size: 42px;
 cursor: pointer;
-z-index: 5;
-}
-
-.playButton:hover {
-background: #f00000;
 }
 
 .status {
@@ -105,15 +102,23 @@ TV<span>Iliria</span> LIVE
 </header>
 
 <div class="player">
-<video id="video" controls playsinline></video>
+
+<video
+id="video"
+controls
+muted
+playsinline
+preload="none">
+</video>
 
 <button id="playButton" class="playButton">
 ▶
 </button>
+
 </div>
 
 <div id="status" class="status">
-Gati për TVIliria LIVE
+Shtyp ▶ për të parë TVIliria LIVE
 </div>
 
 <a href="artikuj.html" class="articles-button">
@@ -135,50 +140,73 @@ const streamURL =
 
 let hls = null;
 
-playButton.addEventListener("click", function () {
+playButton.addEventListener("click", async function () {
 
+playButton.style.display = "none";
 status.textContent = "Po lidhemi me TVIliria LIVE...";
 
+/*
+* Safari / iPhone / iPad
+*/
 if (video.canPlayType("application/vnd.apple.mpegurl")) {
 
 video.src = streamURL;
 
-video.addEventListener("loadedmetadata", function () {
-video.play();
-}, { once: true });
+try {
+await video.play();
+status.textContent = "🔴 TVIliria LIVE";
+} catch (error) {
+status.textContent = "Shtyp Play te kontrollet e videos.";
+playButton.style.display = "block";
+}
 
-} else if (Hls.isSupported()) {
+return;
+}
 
-hls = new Hls();
+/*
+* Chrome / Edge / Firefox
+*/
+if (Hls.isSupported()) {
+
+hls = new Hls({
+enableWorker: true,
+lowLatencyMode: true,
+maxBufferLength: 10
+});
 
 hls.loadSource(streamURL);
 hls.attachMedia(video);
 
-hls.on(Hls.Events.MANIFEST_PARSED, function () {
-video.play();
+hls.on(Hls.Events.MANIFEST_PARSED, async function () {
+
+try {
+await video.play();
+status.textContent = "🔴 TVIliria LIVE";
+} catch (error) {
+status.textContent =
+"Shtyp Play te kontrollet e videos.";
+playButton.style.display = "block";
+}
+
 });
 
 hls.on(Hls.Events.ERROR, function (event, data) {
 
 if (data.fatal) {
 status.textContent =
-"Nuk u lidh LIVE. Provo përsëri.";
+"Nuk u lidh me TVIliria LIVE. Provo përsëri.";
+playButton.style.display = "block";
 }
 
 });
 
-} else {
-
-status.textContent =
-"Shfletuesi nuk mbështet LIVE TV.";
-
+return;
 }
 
-video.addEventListener("playing", function () {
-playButton.style.display = "none";
-status.textContent = "🔴 TVIliria LIVE";
-}, { once: true });
+status.textContent =
+"Shfletuesi nuk mbështet këtë LIVE stream.";
 
+playButton.style.display = "block";
 });
 
 </script>
