@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="sq">
 <head>
@@ -71,7 +72,7 @@ background: #111;
 border: 1px solid #292929;
 border-radius: 8px;
 padding: 20px;
-margin-bottom: 15px;
+margin-bottom: 18px;
 }
 
 .news h2 {
@@ -82,20 +83,30 @@ font-size: 21px;
 .date {
 color: #d4af00;
 font-size: 14px;
-margin-bottom: 12px;
+margin-bottom: 14px;
 }
 
-.news p {
+.summary {
 color: #ccc;
 line-height: 1.6;
-margin: 0;
+}
+
+.full {
+display: none;
+margin-top: 18px;
+color: #ddd;
+line-height: 1.8;
 }
 
 .read {
-display: inline-block;
-margin-top: 15px;
-color: #d4af00;
+margin-top: 18px;
+padding: 11px 18px;
+background: #d4af00;
+color: #000;
+border: none;
+border-radius: 5px;
 font-weight: bold;
+cursor: pointer;
 }
 
 footer {
@@ -132,7 +143,7 @@ Zëri i shqiptarëve në Amerikë
 📰 LAJMET E FUNDIT
 </div>
 
-<div class="news">
+<article class="news">
 
 <h2>
 TVIliria sjell lajme dhe reportazhe nga Shqipëria dhe diaspora
@@ -142,23 +153,53 @@ TVIliria sjell lajme dhe reportazhe nga Shqipëria dhe diaspora
 6 Tetor 2026
 </div>
 
+<div class="summary">
+TVIliria vazhdon misionin e saj për të informuar komunitetin shqiptar
+në Amerikë dhe për të sjellë lajme, reportazhe dhe histori nga
+Shqipëria, Kosova, trevat shqiptare dhe diaspora.
+</div>
+
+<button class="read" onclick="showNews()">
+LEXO MË SHUMË
+</button>
+
+<div class="full" id="fullNews">
+
 <p>
-TVIliria vazhdon të sjellë për komunitetin shqiptar në Amerikë
-lajme, reportazhe dhe histori nga Shqipëria, Kosova, trevat
-shqiptare dhe diaspora.
+TVIliria është një media shqiptare që i shërben komunitetit
+shqiptar në Shtetet e Bashkuara dhe diasporë.
 </p>
 
-<div class="read">
-TVIliria — Lajmet tona
-</div>
+<p>
+Përmes transmetimeve LIVE, lajmeve dhe reportazheve,
+synojmë të sjellim informacion dhe histori nga komuniteti
+shqiptar në Amerikë dhe nga trevat shqiptare.
+</p>
+
+<p>
+Kjo faqe do të pasurohet me lajme të reja dhe materiale
+të përgatitura nga redaksia e TVIliria.
+</p>
 
 </div>
+
+</article>
 
 </div>
 
 <footer>
 © 2026 TVIliria — Albanian Media in America
 </footer>
+
+<script>
+
+function showNews() {
+
+document.getElementById("fullNews").style.display = "block";
+
+}
+
+</script>
 
 </body>
 </html>
