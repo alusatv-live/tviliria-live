@@ -4,8 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TVIliria - Lajmi 2</title>
+
 <style>
+
 * {
 box-sizing: border-box;
 }
@@ -92,6 +95,59 @@ line-height: 1.85;
 color: #ddd;
 }
 
+.share-area {
+margin-top: 30px;
+padding-top: 22px;
+border-top: 1px solid #292929;
+text-align: center;
+}
+
+.share-title {
+color: #aaa;
+font-size: 14px;
+margin-bottom: 12px;
+}
+
+.share-button {
+display: inline-block;
+padding: 12px 22px;
+background: #d4af00;
+color: #000;
+border: none;
+border-radius: 6px;
+font-size: 15px;
+font-weight: bold;
+cursor: pointer;
+margin: 4px;
+}
+
+.share-button:hover {
+background: #f0c400;
+}
+
+.copy-button {
+display: inline-block;
+padding: 12px 22px;
+background: #d00000;
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 15px;
+font-weight: bold;
+cursor: pointer;
+margin: 4px;
+}
+
+.copy-button:hover {
+background: #ed0000;
+}
+
+.share-message {
+margin-top: 10px;
+color: #aaa;
+font-size: 13px;
+}
+
 .back {
 display: inline-block;
 margin-top: 28px;
@@ -101,7 +157,6 @@ color: #000;
 text-decoration: none;
 font-weight: bold;
 border-radius: 6px;
-transition: 0.2s;
 }
 
 .back:hover {
@@ -145,46 +200,151 @@ font-size: 16px;
 line-height: 1.75;
 }
 
+.share-button,
+.copy-button {
+width: 100%;
+margin: 5px 0;
+}
+
 .back {
 width: 100%;
 text-align: center;
 }
+
 }
+
 </style>
 </head>
+
 <body>
+
 <header>
+
 <div class="logo">
 TV<span>Iliria</span>
 </div>
+
 <div class="tagline">
 Zëri i shqiptarëve në Amerikë
 </div>
+
 </header>
+
 <div class="breaking">
 🔴 TVILIRIA — LAJME NGA SHQIPËRIA DHE DIASPORA
 </div>
+
 <div class="container">
+
 <article class="article">
+
 <div class="date">
-6 Tetor 2026
+7 Tetor 2026
 </div>
+
 <h1>
 Lajm i ri nga TVIliria
 </h1>
+
 <div class="summary">
 Ky është një lajm i ri i publikuar nga TVIliria për komunitetin shqiptar.
 </div>
+
 <div class="text">
 TVIliria do të sjellë vazhdimisht lajme, reportazhe dhe informacione të reja nga Shqipëria, diaspora dhe komuniteti shqiptar në Amerikë.
 </div>
+
+
+<div class="share-area">
+
+<div class="share-title">
+📢 Ndaje këtë lajm me miqtë
+</div>
+
+<button class="share-button" onclick="shareArticle()">
+📤 SHPËRNDAJE
+</button>
+
+<button class="copy-button" onclick="copyLink()">
+🔗 KOPJO LINKUN
+</button>
+
+<div id="shareMessage" class="share-message"></div>
+
+</div>
+
+
 <a href="../index.html" class="back">
 ← KTHEHU TE TVILIRIA
 </a>
+
 </article>
+
 </div>
+
 <footer>
 © 2026 TVIliria — Albanian Media in America
 </footer>
+
+
+<script>
+
+async function shareArticle() {
+
+const shareData = {
+title: "TVIliria - Lajmi i ri",
+text: "Shiko këtë lajm në TVIliria:",
+url: window.location.href
+};
+
+try {
+
+if (navigator.share) {
+
+await navigator.share(shareData);
+
+document.getElementById("shareMessage").textContent =
+"Lajmi u përgatit për shpërndarje.";
+
+} else {
+
+await copyLink();
+
+}
+
+} catch (error) {
+
+if (error.name !== "AbortError") {
+
+document.getElementById("shareMessage").textContent =
+"Përdor KOPJO LINKUN për ta shpërndarë lajmin.";
+
+}
+
+}
+
+}
+
+
+async function copyLink() {
+
+try {
+
+await navigator.clipboard.writeText(window.location.href);
+
+document.getElementById("shareMessage").textContent =
+"✅ Linku u kopjua. Tani mund ta dërgosh kudo.";
+
+} catch (error) {
+
+document.getElementById("shareMessage").textContent =
+"Kopjimi automatik nuk u lejua nga shfletuesi.";
+
+}
+
+}
+
+</script>
+
 </body>
 </html>
