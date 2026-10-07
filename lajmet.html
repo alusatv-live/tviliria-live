@@ -143,47 +143,9 @@ Zëri i shqiptarëve në Amerikë
 📰 LAJMET E FUNDIT
 </div>
 
-<article class="news">
-
-<h2>
-TVIliria sjell lajme dhe reportazhe nga Shqipëria dhe diaspora
-</h2>
-
-<div class="date">
-6 Tetor 2026
+<div id="newsContainer">
+Po ngarkohen lajmet...
 </div>
-
-<div class="summary">
-TVIliria vazhdon misionin e saj për të informuar komunitetin shqiptar
-në Amerikë dhe për të sjellë lajme, reportazhe dhe histori nga
-Shqipëria, Kosova, trevat shqiptare dhe diaspora.
-</div>
-
-<button class="read" onclick="showNews()">
-LEXO MË SHUMË
-</button>
-
-<div class="full" id="fullNews">
-
-<p>
-TVIliria është një media shqiptare që i shërben komunitetit
-shqiptar në Shtetet e Bashkuara dhe diasporë.
-</p>
-
-<p>
-Përmes transmetimeve LIVE, lajmeve dhe reportazheve,
-synojmë të sjellim informacion dhe histori nga komuniteti
-shqiptar në Amerikë dhe nga trevat shqiptare.
-</p>
-
-<p>
-Kjo faqe do të pasurohet me lajme të reja dhe materiale
-të përgatitura nga redaksia e TVIliria.
-</p>
-
-</div>
-
-</article>
 
 </div>
 
@@ -193,13 +155,74 @@ të përgatitura nga redaksia e TVIliria.
 
 <script>
 
-function showNews() {
+async function loadNews() {
 
-document.getElementById("fullNews").style.display = "block";
+const container =
+document.getElementById("newsContainer");
+
+try {
+
+const response =
+await fetch("news/lajmi1.json");
+
+if (!response.ok) {
+throw new Error("Lajmi nuk u gjet");
+}
+
+const news = await response.json();
+
+container.innerHTML = `
+
+<article class="news">
+
+<h2>
+${news.titulli}
+</h2>
+
+<div class="date">
+${news.data}
+</div>
+
+<div class="summary">
+${news.permbledhje}
+</div>
+
+<button class="read" onclick="showNews()">
+LEXO MË SHUMË
+</button>
+
+<div class="full" id="fullNews">
+<p>
+${news.teksti}
+</p>
+</div>
+
+</article>
+
+`;
+
+} catch (error) {
+
+container.innerHTML =
+"<p>Nuk u ngarkua lajmi.</p>";
 
 }
+
+}
+
+function showNews() {
+
+document.getElementById("fullNews").style.display =
+"block";
+
+}
+
+loadNews();
 
 </script>
 
 </body>
 </html>
+
+
+
