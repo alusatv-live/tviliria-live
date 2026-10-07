@@ -5,9 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lajmet TVIliria</title>
+<title>TVIliria - Lajmet e Fundit</title>
 
 <style>
+
 * {
 box-sizing: border-box;
 }
@@ -16,10 +17,11 @@ body {
 margin: 0;
 background: #050505;
 color: white;
-font-family: Arial, sans-serif;
+font-family: Arial, Helvetica, sans-serif;
 }
 
 /* HEADER */
+
 header {
 background: linear-gradient(135deg, #080808, #1b1b1b);
 padding: 22px 15px;
@@ -43,48 +45,81 @@ margin-top: 6px;
 font-size: 14px;
 }
 
-/* NAV */
-.nav {
-text-align: center;
-padding: 15px 10px;
-background: #0d0d0d;
-border-bottom: 1px solid #222;
+.slogan {
+color: #d4af00;
+margin-top: 8px;
+font-size: 15px;
+font-weight: bold;
 }
 
-.live {
-display: inline-block;
+/* NAV */
+
+.nav {
+display: flex;
+justify-content: center;
+gap: 8px;
+padding: 10px;
+background: #0d0d0d;
+border-bottom: 1px solid #292929;
+}
+
+.nav a {
+color: white;
+text-decoration: none;
+font-size: 14px;
+font-weight: bold;
+padding: 10px 16px;
+border-radius: 5px;
+}
+
+.nav a:hover {
+background: #d4af00;
+color: #000;
+}
+
+.nav .live {
 background: #d00000;
 color: white;
-padding: 10px 20px;
-border-radius: 5px;
-text-decoration: none;
-font-weight: bold;
 }
 
 /* CONTAINER */
+
 .container {
 width: 94%;
 max-width: 1050px;
-margin: 25px auto 50px;
+margin: 28px auto 50px;
 }
 
 .page-title {
-font-size: 27px;
+font-size: 28px;
 font-weight: bold;
 border-left: 6px solid #d00000;
-padding: 12px 15px;
+padding: 14px 17px;
 background: linear-gradient(90deg, #151515, #0b0b0b);
+margin-bottom: 12px;
+border-radius: 4px;
+}
+
+.page-intro {
+color: #999;
+font-size: 15px;
+line-height: 1.6;
 margin-bottom: 22px;
 }
 
 /* NEWS CARD */
+
 .news {
 background: linear-gradient(145deg, #151515, #0b0b0b);
 border: 1px solid #292929;
 border-radius: 10px;
-padding: 22px;
+padding: 24px;
 margin-bottom: 20px;
 box-shadow: 0 5px 20px rgba(0,0,0,0.35);
+}
+
+.news:hover {
+border-color: #d4af00;
 }
 
 .news h2 {
@@ -106,18 +141,8 @@ line-height: 1.7;
 font-size: 16px;
 }
 
-.full {
-display: none;
-margin-top: 20px;
-padding-top: 18px;
-border-top: 1px solid #333;
-color: #ddd;
-line-height: 1.8;
-font-size: 16px;
-}
-
-/* BUTTON */
 .read {
+display: inline-block;
 margin-top: 18px;
 padding: 12px 20px;
 background: #d4af00;
@@ -126,6 +151,7 @@ border: none;
 border-radius: 5px;
 font-weight: bold;
 cursor: pointer;
+text-decoration: none;
 }
 
 .read:hover {
@@ -133,6 +159,7 @@ background: #f0c800;
 }
 
 /* FOOTER */
+
 footer {
 padding: 30px 15px;
 text-align: center;
@@ -142,6 +169,7 @@ background: #080808;
 }
 
 /* MOBILE */
+
 @media (max-width: 600px) {
 
 .logo {
@@ -156,7 +184,21 @@ font-size: 22px;
 font-size: 20px;
 }
 
+.nav {
+flex-wrap: wrap;
 }
+
+.nav a {
+font-size: 13px;
+padding: 9px 12px;
+}
+
+.news {
+padding: 20px;
+}
+
+}
+
 </style>
 </head>
 
@@ -169,23 +211,41 @@ TV<span>Iliria</span>
 </div>
 
 <div class="subtitle">
-Zëri i shqiptarëve në Amerikë
+Jeto si shqiptarë në Amerikë
+</div>
+
+<div class="slogan">
+🇦🇱 🇺🇸
 </div>
 
 </header>
 
+
 <div class="nav">
 
-<a href="index.html" class="live">
-🔴 LIVE TV
+<a href="index.html">
+LIVE
+</a>
+
+<a href="lajmet.html">
+LAJMET E FUNDIT
+</a>
+
+<a href="index.html#rreth">
+RRETH TVILIRIA
 </a>
 
 </div>
+
 
 <div class="container">
 
 <div class="page-title">
 📰 LAJMET E FUNDIT
+</div>
+
+<div class="page-intro">
+Lajmet, reportazhet dhe informacionet më të fundit nga Shqipëria, Kosova, trevat shqiptare dhe diaspora.
 </div>
 
 <div id="newsContainer">
@@ -194,11 +254,27 @@ Po ngarkohen lajmet...
 
 </div>
 
+
 <footer>
 © 2026 TVIliria — Albanian Media in America
 </footer>
 
+
 <script>
+
+function getTodayDate() {
+
+const now = new Date();
+
+return now.toLocaleDateString("sq-AL", {
+day: "2-digit",
+month: "long",
+year: "numeric",
+timeZone: "America/Chicago"
+});
+
+}
+
 
 async function loadNews() {
 
@@ -236,6 +312,14 @@ document.createElement("article");
 
 article.className = "news";
 
+
+let articleLink = "lajmi1.html";
+
+if (i === 1) {
+articleLink = "news/lajmi2.html";
+}
+
+
 article.innerHTML = `
 
 <h2>
@@ -243,41 +327,23 @@ ${news.titulli}
 </h2>
 
 <div class="date">
-📅 ${news.data}
+📅 ${getTodayDate()}
 </div>
 
 <div class="summary">
 ${news.permbledhje}
 </div>
 
-<button class="read">
-LEXO MË SHUMË
-</button>
-
-<div class="full">
-<p>
-${news.teksti}
-</p>
-</div>
+<a href="${articleLink}" class="read">
+LEXO MË SHUMË →
+</a>
 
 `;
 
-const button =
-article.querySelector(".read");
-
-const full =
-article.querySelector(".full");
-
-button.addEventListener("click", function() {
-
-full.style.display = "block";
-
-button.style.display = "none";
-
-});
-
 container.appendChild(article);
+
 }
+
 
 if (!container.innerHTML.trim()) {
 
