@@ -1,12 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="sq">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TVIliria - Lajmi Jonë</title>
+<title>TVIliria - Lajmi 1</title>
 
 <style>
+
 * {
 box-sizing: border-box;
 }
@@ -15,19 +17,20 @@ body {
 margin: 0;
 background: #050505;
 color: white;
-font-family: Arial, sans-serif;
+font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
-background: linear-gradient(135deg, #111, #1b1b1b);
-padding: 22px 15px;
+background: linear-gradient(135deg, #0b0b0b, #1c1c1c);
+padding: 20px 15px;
 text-align: center;
 border-bottom: 3px solid #c40000;
 }
 
 .logo {
-font-size: 34px;
+font-size: 36px;
 font-weight: bold;
+letter-spacing: 1px;
 }
 
 .logo span {
@@ -40,6 +43,16 @@ color: #aaa;
 font-size: 14px;
 }
 
+.breaking {
+background: #c40000;
+color: white;
+font-size: 13px;
+font-weight: bold;
+padding: 8px 12px;
+text-align: center;
+letter-spacing: 1px;
+}
+
 .container {
 width: 92%;
 max-width: 900px;
@@ -49,41 +62,96 @@ margin: 30px auto;
 .article {
 background: #111;
 border: 1px solid #292929;
-border-radius: 8px;
-padding: 25px;
+border-radius: 10px;
+padding: 28px;
+box-shadow: 0 8px 30px rgba(0,0,0,0.45);
 }
 
 .date {
 color: #d4af00;
 font-size: 14px;
+font-weight: bold;
 margin-bottom: 12px;
 }
 
 h1 {
-font-size: 30px;
+font-size: 32px;
 line-height: 1.25;
-margin: 0 0 18px;
+margin: 0 0 20px;
 }
 
 .summary {
 font-size: 18px;
 line-height: 1.6;
-color: #ccc;
+color: #ddd;
 border-left: 4px solid #d00000;
 padding-left: 15px;
-margin-bottom: 22px;
+margin-bottom: 24px;
 }
 
 .text {
 font-size: 17px;
-line-height: 1.8;
+line-height: 1.85;
 color: #ddd;
+}
+
+.share-area {
+margin-top: 30px;
+padding-top: 22px;
+border-top: 1px solid #292929;
+text-align: center;
+}
+
+.share-title {
+color: #aaa;
+font-size: 14px;
+margin-bottom: 12px;
+}
+
+.share-button {
+display: inline-block;
+padding: 12px 22px;
+background: #d4af00;
+color: #000;
+border: none;
+border-radius: 6px;
+font-size: 15px;
+font-weight: bold;
+cursor: pointer;
+margin: 4px;
+}
+
+.share-button:hover {
+background: #f0c400;
+}
+
+.copy-button {
+display: inline-block;
+padding: 12px 22px;
+background: #d00000;
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 15px;
+font-weight: bold;
+cursor: pointer;
+margin: 4px;
+}
+
+.copy-button:hover {
+background: #ed0000;
+}
+
+.share-message {
+margin-top: 10px;
+color: #aaa;
+font-size: 13px;
 }
 
 .back {
 display: inline-block;
-margin-top: 25px;
-padding: 12px 20px;
+margin-top: 28px;
+padding: 13px 22px;
 background: #d4af00;
 color: #000;
 text-decoration: none;
@@ -91,12 +159,58 @@ font-weight: bold;
 border-radius: 6px;
 }
 
+.back:hover {
+background: #f0c400;
+}
+
 footer {
-margin-top: 40px;
+margin-top: 45px;
 padding: 25px;
 text-align: center;
 color: #777;
 border-top: 1px solid #222;
+font-size: 13px;
+}
+
+@media (max-width: 600px) {
+
+.logo {
+font-size: 30px;
+}
+
+.container {
+width: 94%;
+margin: 20px auto;
+}
+
+.article {
+padding: 20px;
+}
+
+h1 {
+font-size: 26px;
+}
+
+.summary {
+font-size: 17px;
+}
+
+.text {
+font-size: 16px;
+line-height: 1.75;
+}
+
+.share-button,
+.copy-button {
+width: 100%;
+margin: 5px 0;
+}
+
+.back {
+width: 100%;
+text-align: center;
+}
+
 }
 
 </style>
@@ -116,27 +230,49 @@ Zëri i shqiptarëve në Amerikë
 
 </header>
 
+<div class="breaking">
+🔴 TVILIRIA — LAJME NGA SHQIPËRIA DHE DIASPORA
+</div>
+
 <div class="container">
 
 <article class="article">
 
 <div class="date">
-6 Tetor 2026
+7 Tetor 2026
 </div>
 
 <h1>
-TVIliria sjell lajmet më të fundit për shqiptarët në Amerikë
+Lajmi i parë nga TVIliria
 </h1>
 
 <div class="summary">
-TVIliria vazhdon të informojë komunitetin shqiptar në Amerikë dhe diasporë me lajme, reportazhe dhe materiale nga Shqipëria dhe trevat shqiptare.
+TVIliria sjell informacionet më të fundit për komunitetin shqiptar në Amerikë dhe diasporë.
 </div>
 
 <div class="text">
-TVIliria është pranë komunitetit shqiptar në Amerikë me transmetime LIVE, lajme dhe reportazhe.
-
-Platforma jonë do të sjellë vazhdimisht materiale të reja nga Shqipëria, Kosova, trevat shqiptare dhe diaspora.
+TVIliria do të sjellë vazhdimisht lajme, reportazhe dhe informacione të reja nga Shqipëria, diaspora dhe komuniteti shqiptar në Amerikë.
 </div>
+
+
+<div class="share-area">
+
+<div class="share-title">
+📢 Ndaje këtë lajm me miqtë
+</div>
+
+<button class="share-button" onclick="shareArticle()">
+📤 SHPËRNDAJE
+</button>
+
+<button class="copy-button" onclick="copyLink()">
+🔗 KOPJO LINKUN
+</button>
+
+<div id="shareMessage" class="share-message"></div>
+
+</div>
+
 
 <a href="index.html" class="back">
 ← KTHEHU TE TVILIRIA
@@ -149,6 +285,66 @@ Platforma jonë do të sjellë vazhdimisht materiale të reja nga Shqipëria, Ko
 <footer>
 © 2026 TVIliria — Albanian Media in America
 </footer>
+
+
+<script>
+
+async function shareArticle() {
+
+const shareData = {
+title: "TVIliria - Lajmi i parë",
+text: "Shiko këtë lajm në TVIliria:",
+url: window.location.href
+};
+
+try {
+
+if (navigator.share) {
+
+await navigator.share(shareData);
+
+document.getElementById("shareMessage").textContent =
+"Lajmi u përgatit për shpërndarje.";
+
+} else {
+
+await copyLink();
+
+}
+
+} catch (error) {
+
+if (error.name !== "AbortError") {
+
+document.getElementById("shareMessage").textContent =
+"Përdor KOPJO LINKUN për ta shpërndarë lajmin.";
+
+}
+
+}
+
+}
+
+
+async function copyLink() {
+
+try {
+
+await navigator.clipboard.writeText(window.location.href);
+
+document.getElementById("shareMessage").textContent =
+"✅ Linku u kopjua. Tani mund ta dërgosh kudo.";
+
+} catch (error) {
+
+document.getElementById("shareMessage").textContent =
+"Kopjimi automatik nuk u lejua nga shfletuesi.";
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
