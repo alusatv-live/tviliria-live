@@ -1,11 +1,18 @@
 
 <!DOCTYPE html>
+
 <html lang="sq">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta name="theme-color" content="#050505">
+
 <link rel="manifest" href="manifest.json">
+
 <title>TVIliria LIVE - Lajmet e Fundit</title>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -13,499 +20,540 @@
 <style>
 
 * {
-box-sizing: border-box;
+
+  box-sizing: border-box;
+
 }
 
 body {
-margin: 0;
-background: #050505;
-color: white;
-font-family: Arial, Helvetica, sans-serif;
+
+  margin: 0;
+
+  background: #050505;
+
+  color: #fff;
+
+  font-family: Arial, sans-serif;
+
 }
 
 header {
-background: linear-gradient(135deg, #0b0b0b, #1c1c1c);
-padding: 22px 15px;
-text-align: center;
-border-bottom: 3px solid #c40000;
+
+  text-align: center;
+
+  padding: 22px 12px;
+
+  background: #111;
+
+  border-bottom: 3px solid #d4af00;
+
 }
 
 .logo {
-font-size: 36px;
-font-weight: bold;
-letter-spacing: 1px;
-}
 
-.logo span {
-color: #e00000;
+  color: #d4af00;
+
+  font-size: 36px;
+
+  font-weight: bold;
+
+  margin: 0;
+
 }
 
 .tagline {
-margin-top: 6px;
-color: #aaa;
-font-size: 14px;
+
+  margin: 8px 0;
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+
 }
 
 .live-label {
-display: inline-block;
-margin-top: 12px;
-background: #d00000;
-padding: 8px 16px;
-border-radius: 20px;
-font-size: 13px;
-font-weight: bold;
+
+  display: inline-block;
+
+  color: #fff;
+
+  background: #c90000;
+
+  padding: 6px 14px;
+
+  border-radius: 4px;
+
+  font-weight: bold;
+
+  margin: 8px 0;
+
 }
 
-.date-time {
-margin-top: 10px;
-color: #d4af00;
-font-size: 14px;
-font-weight: bold;
-}
-.main-nav {
-display: flex;
-justify-content: center;
-gap: 8px;
-background: #0d0d0d;
-padding: 10px;
-border-bottom: 1px solid #292929;
+#dateTime {
+
+  color: #f0d65c;
+
+  margin-top: 8px;
+
+  font-size: 14px;
+
 }
 
-.main-nav a {
-color: white;
-text-decoration: none;
-font-size: 14px;
-font-weight: bold;
-padding: 10px 16px;
-border-radius: 5px;
+nav {
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  padding: 14px 8px;
+
+  background: #191919;
+
 }
 
-.main-nav a:hover {
-background: #d4af00;
-color: #000;
-}
-.player {
-width: 100%;
-max-width: 1000px;
-margin: 22px auto 10px;
-aspect-ratio: 16 / 9;
-background: #000;
-position: relative;
-border-radius: 10px;
-overflow: hidden;
-box-shadow: 0 0 25px rgba(255,0,0,0.15);
+nav a {
+
+  color: #d4af00;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  padding: 8px;
+
 }
 
-video {
-width: 100%;
-height: 100%;
-display: block;
-background: #000;
-object-fit: contain;
+nav a:hover {
+
+  color: #fff;
+
 }
 
-.playButton {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 88px;
-height: 88px;
-border-radius: 50%;
-border: 3px solid white;
-background: #d00000;
-color: white;
-font-size: 40px;
-cursor: pointer;
-z-index: 10;
-}
+main {
 
-.status {
-text-align: center;
-padding: 12px;
-color: #aaa;
-font-size: 14px;
-}
+  max-width: 1000px;
 
-.section {
-width: 92%;
-max-width: 1000px;
-margin: 25px auto 40px;
+  margin: auto;
+
+  padding: 18px;
+
 }
 
 .section-title {
-display: block;
-border-left: 5px solid #d00000;
-padding: 13px 16px;
-background: #111;
-color: white;
-font-size: 23px;
-font-weight: bold;
-text-decoration: none;
-border-radius: 4px;
+
+  text-align: center;
+
+  color: #d4af00;
+
+  margin: 25px 0 18px;
+
 }
 
-.news-intro {
-color: #999;
-font-size: 15px;
-margin: 12px 4px 18px;
-line-height: 1.6;
+.video-container {
+
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  background: #000;
+
+  border: 2px solid #d4af00;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+}
+
+#video {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: #000;
+
+}
+
+#playButton {
+
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #c90000;
+
+  color: white;
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+  padding: 14px 25px;
+
+  cursor: pointer;
+
+}
+
+#status {
+
+  min-height: 24px;
+
+  text-align: center;
+
+  color: #f0d65c;
+
+  margin: 12px 0 24px;
+
 }
 
 .news-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 16px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
 }
 
 .news-card {
-background: #111;
-border: 1px solid #292929;
-border-radius: 10px;
-padding: 20px;
-box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+
+  background: #151515;
+
+  border: 1px solid #5d4d00;
+
+  border-radius: 8px;
+
+  padding: 20px;
+
+  text-align: center;
+
 }
 
-.news-card:hover {
-border-color: #d4af00;
-}
+.news-card h3 {
 
-.news-date {
-color: #d4af00;
-font-size: 13px;
-font-weight: bold;
-margin-bottom: 10px;
-}
+  color: #d4af00;
 
-.news-card h2 {
-margin: 0 0 10px;
-font-size: 21px;
-line-height: 1.3;
+  margin-top: 0;
+
 }
 
 .news-card p {
-margin: 0;
-color: #aaa;
-line-height: 1.6;
-font-size: 15px;
+
+  line-height: 1.6;
+
 }
 
-.read-button {
-display: inline-block;
-margin-top: 17px;
-padding: 10px 17px;
-background: #d4af00;
-color: #000;
-text-decoration: none;
-font-weight: bold;
-border-radius: 6px;
-font-size: 14px;
+.news-card a {
+
+  display: inline-block;
+
+  background: #c90000;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  padding: 11px 18px;
+
+  border-radius: 5px;
+
+  margin-top: 8px;
+
 }
 
-.read-button.red {
-background: #d00000;
-color: white;
-}
-<section id="rreth" class="about-section">
+.news-card a:hover {
 
-<h2>RRETH TVILIRIA</h2>
+  background: #a00000;
 
-<p>
-TVIliria është një media shqiptare në Amerikë, e krijuar për të sjellë lajme,
-informacion, kulturë dhe zërin e komunitetit shqiptar në Shtetet e Bashkuara.
-</p>
-
-<p>
-Që nga fillimet e saj në Chicago, TVIliria ka qenë pranë shqiptarëve në Amerikë,
-duke promovuar gjuhën, kulturën, traditat dhe lidhjen me trojet shqiptare.
-</p>
-
-<p class="about-slogan">
-Jeto si shqiptarë në Amerikë
-</p>
-
-</section>
-.about-section {
-width: 92%;
-max-width: 1000px;
-margin: 45px auto 20px;
-padding: 28px;
-background: #111;
-border: 1px solid #292929;
-border-left: 5px solid #d4af00;
-border-radius: 10px;
-box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
-.about-section h2 {
-margin: 0 0 18px;
-font-size: 24px;
-color: #d4af00;
+.news-date {
+
+  color: #aaa;
+
+  font-size: 13px;
+
 }
 
-.about-section p {
-color: #bbb;
-font-size: 16px;
-line-height: 1.7;
-margin: 10px 0;
-}
+.about-section,
 
-.about-section .about-slogan {
-color: white;
-font-size: 19px;
-font-weight: bold;
-margin-top: 20px;
 .contact-section {
-width: 92%;
-max-width: 1000px;
-margin: 45px auto 20px;
-padding: 28px;
-background: #111;
-border: 1px solid #292929;
-border-left: 5px solid #d4af00;
-border-radius: 10px;
-box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+
+  margin-top: 28px;
+
+  padding: 24px 18px;
+
+  background: #151515;
+
+  border-top: 4px solid #d4af00;
+
+  border-radius: 7px;
+
+  text-align: center;
+
 }
+
+.about-section h2,
 
 .contact-section h2 {
-margin: 0 0 18px;
-font-size: 24px;
-color: #d4af00;
+
+  color: #d4af00;
+
 }
+
+.about-section p,
 
 .contact-section p {
-color: #bbb;
-font-size: 16px;
-line-height: 1.7;
-margin: 10px 0;
+
+  line-height: 1.7;
+
 }
 
-.contact-info {
-margin-top: 20px;
-padding-top: 15px;
-border-top: 1px solid #292929;
-}  
-}footer {
-margin-top: 45px;
-padding: 28px 15px;
-text-align: center;
-color: #777;
-border-top: 1px solid #222;
-background: #080808;
-font-size: 13px;
+.about-slogan {
+
+  color: #f0d65c;
+
+  font-weight: bold;
+
 }
 
-@media (max-width: 700px) {
+.contact-section a {
 
-.logo {
-font-size: 30px;
+  color: #f0d65c;
+
+  text-decoration: none;
+
 }
 
-.section {
-width: 94%;
+footer {
+
+  text-align: center;
+
+  padding: 20px 10px;
+
+  margin-top: 25px;
+
+  background: #111;
+
+  border-top: 1px solid #444;
+
+  color: #aaa;
+
+  font-size: 13px;
+
 }
 
-.section-title {
-font-size: 21px;
-}
+@media (max-width: 600px) {
 
-.news-grid {
-grid-template-columns: 1fr;
-}
+  .logo {
 
-.news-card {
-padding: 18px;
-}
+    font-size: 30px;
 
-.playButton {
-width: 72px;
-height: 72px;
-font-size: 32px;
-}
+  }
+
+  main {
+
+    padding: 12px;
+
+  }
+
+  .news-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  nav {
+
+    gap: 4px;
+
+  }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
-<nav class="main-nav">
 
+  <h1 class="logo">TVIliria</h1>
 
+  <p class="tagline">JETO SI SHQIPTARË NË AMERIKË</p>
 
-<a href="lajmet.html">LAJMET E FUNDIT</a>
+  <div class="live-label">🔴 TVIliria LIVE</div>
 
-<a href="#contact">
-NA KONTAKTONI
-</a>
-
-</nav>
-<div class="logo">
-TV<span>Iliria</span>
-</div>
-
-<div class="tagline">
-JETO SI SHQIPETARE NE AMERIKE
-</div>
-
-<div class="live-label">
-🔴 LIVE TV
-</div>
-
-<div id="dateTime" class="date-time"></div>
+  <div id="dateTime">📅 Data dhe ora</div>
 
 </header>
 
+<nav>
 
-<div class="player">
+  <a href="#live">LIVE</a>
 
-<video
-id="video"
-controls
-muted
-playsinline
-preload="auto">
-</video>
+  <a href="#lajmet">LAJMET E FUNDIT</a>
 
-<button id="playButton" class="playButton">
-▶
-</button>
+  <a href="#contact">NA KONTAKTONI</a>
 
-</div>
+</nav>
 
+<main>
 
-<div id="status" class="status">
-Shtyp ▶ për të parë TVIliria LIVE
-</div>
+  <section id="live">
 
+    <h2 class="section-title">TRANSMETIMI LIVE</h2>
 
-<section class="section">
+    <div class="video-container">
 
-<a href="lajmet.html" class="section-title">
-📰 LAJMET E FUNDIT
-</a>
+      <video id="video" controls playsinline></video>
 
-<div class="news-intro">
-Lajmet, reportazhet dhe informacionet më të fundit nga Shqipëria, Kosova, trevat shqiptare dhe diaspora.
-</div>
+      <button id="playButton" type="button">▶ SHIKO LIVE</button>
 
+    </div>
 
-<div class="news-grid">
+    <div id="status">Shtyp butonin për të parë TVIliria LIVE.</div>
 
+  </section>
 
-<div class="news-card">
+  <section id="lajmet">
 
-<div class="news-date" id="newsDate1">
-</div>
+    <h2 class="section-title">LAJMET E FUNDIT</h2>
 
-<h2>
-Lajmi i parë nga TVIliria
-</h2>
+    <div class="news-grid">
 
-<p>
-TVIliria sjell informacionet më të fundit për komunitetin shqiptar në Amerikë dhe diasporë.
-</p>
+      <article class="news-card">
 
-<a href="lajmi1.html" class="read-button">
-LEXO MË SHUMË →
-</a>
+        <h3>BOTA RRETH NESH</h3>
 
-</div>
+        <p>Reportazhe, histori dhe informacione nga bota që na rrethon.</p>
 
+        <p class="news-date" id="newsDate1"></p>
 
-<div class="news-card">
+        <a href="https://tviliria.org/category/bota-rreth-nesh/">LEXO MË SHUMË</a>
 
-<div class="news-date" id="newsDate2">
-</div>
+      </article>
 
-<h2>
-Lajm i ri nga TVIliria
-</h2>
+      <article class="news-card">
 
-<p>
-TVIliria do të sjellë vazhdimisht lajme, reportazhe dhe informacione të reja nga Shqipëria dhe diaspora.
-</p>
+        <h3>JO VETËM MODË</h3>
 
-<a href="news/lajmi2.html" class="read-button red">
-LEXO MË SHUMË →
-</a>
+        <p>Stil, kulturë dhe përditshmëri në rubrikën Jo Vetëm Modë.</p>
 
-</div>
+        <p class="news-date" id="newsDate2"></p>
 
+        <a href="https://tviliria.org/category/jo-vetem-mode/">LEXO MË SHUMË</a>
 
-</div>
+      </article>
 
-</section>
+    </div>
 
-<section id="contact" class="contact-section">
+  </section>
 
-<h2>NA KONTAKTONI</h2>
+  <section class="about-section" id="rreth">
 
-<p>
-Për lajme, bashkëpunime, reklama dhe informacione nga komuniteti shqiptar,
-na kontaktoni me TVIliria.
-</p>
+    <h2>RRETH TVIliria</h2>
 
-<div class="contact-info">
+    <p>TVIliria sjell lajme, reportazhe dhe informacione nga Shqipëria, diaspora dhe komuniteti shqiptar.</p>
 
-<p>📍 Chicago, Illinois</p>
+    <p class="about-slogan">Këtu si shqiptarë në Amerikë.</p>
 
-<p>📞 <a href="tel:+17082715506" style="color:#d4af00; text-decoration:none;">
-+1 708 271 5506
-</a></p>
+  </section>
 
-<p>📧 TVIliria</p>
+  <section class="contact-section" id="contact">
 
-</div>
+    <h2>NA KONTAKTONI</h2>
 
-</section>
+    <p>📍 Chicago, Illinois, USA</p>
+
+    <p>📞 <a href="tel:+17082715506">+1 708 271 5506</a></p>
+
+    <p>📧 <a href="mailto:alusatv@gmail.com">alusatv@gmail.com</a></p>
+
+    <p>Njoftime dhe sugjerime janë të mirëpritura.</p>
+
+  </section>
+
+</main>
+
 <footer>
-© 2026 TVIliria — Albanian Media in America
-</footer>
 
+  © <span id="year"></span> TVIliria. Të gjitha të drejtat e rezervuara.
+
+</footer>
 
 <script>
 
 const video = document.getElementById("video");
+
 const playButton = document.getElementById("playButton");
+
 const status = document.getElementById("status");
 
 const streamURL = "/api/proxy";
 
 let hls = null;
 
-
-/* DATA DHE ORA AUTOMATIKE */
-
 function updateDateTime() {
 
-const now = new Date();
+  const now = new Date();
 
-const date = now.toLocaleDateString("sq-AL", {
-day: "2-digit",
-month: "long",
-year: "numeric",
-timeZone: "America/Chicago"
-});
+  const date = now.toLocaleDateString("sq-AL", {
 
-const time = now.toLocaleTimeString("sq-AL", {
-hour: "2-digit",
-minute: "2-digit",
-second: "2-digit",
-hour12: false,
-timeZone: "America/Chicago"
-});
+    day: "2-digit",
 
-document.getElementById("dateTime").textContent =
-"📅 " + date + " • 🕐 " + time;
+    month: "long",
 
-document.getElementById("newsDate1").textContent =
-date;
+    year: "numeric",
 
-document.getElementById("newsDate2").textContent =
-date;
+    timeZone: "America/Chicago"
+
+  });
+
+  const time = now.toLocaleTimeString("sq-AL", {
+
+    hour: "2-digit",
+
+    minute: "2-digit",
+
+    second: "2-digit",
+
+    hour12: false,
+
+    timeZone: "America/Chicago"
+
+  });
+
+  document.getElementById("dateTime").textContent =
+
+    "📅 " + date + " • 🕐 " + time;
+
+  document.getElementById("newsDate1").textContent = date;
+
+  document.getElementById("newsDate2").textContent = date;
+
+  document.getElementById("year").textContent = now.getFullYear();
 
 }
 
@@ -513,138 +561,127 @@ updateDateTime();
 
 setInterval(updateDateTime, 1000);
 
-
-/* LIVE TV */
-
 playButton.addEventListener("click", function () {
 
-status.textContent = "Po lidhemi me TVIliria LIVE...";
+  status.textContent = "Po lidhemi me TVIliria LIVE...";
 
-playButton.style.display = "none";
+  playButton.style.display = "none";
 
+  if (Hls.isSupported()) {
 
-if (Hls.isSupported()) {
+    if (hls) hls.destroy();
 
-if (hls) {
-hls.destroy();
-}
+    hls = new Hls({
 
-hls = new Hls({
-enableWorker: true,
-lowLatencyMode: false,
-maxBufferLength: 20,
-maxMaxBufferLength: 30,
-liveSyncDurationCount: 3
-});
+      enableWorker: true,
 
-hls.attachMedia(video);
+      lowLatencyMode: false,
 
-hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+      maxBufferLength: 20,
 
-hls.loadSource(streamURL);
+      maxMaxBufferLength: 30,
 
-});
+      liveSyncDurationCount: 3
 
-hls.on(Hls.Events.MANIFEST_PARSED, function () {
+    });
 
-video.play()
-.then(function () {
+    hls.attachMedia(video);
 
-status.textContent = "🔴 TVIliria LIVE";
+    hls.on(Hls.Events.MEDIA_ATTACHED, function () {
 
-})
-.catch(function () {
+      hls.loadSource(streamURL);
 
-status.textContent =
-"Shtyp ▶ te videoja për të nisur LIVE.";
+    });
 
-playButton.style.display = "block";
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
 
-});
+      video.play().then(function () {
 
-});
+        status.textContent = "🔴 TVIliria LIVE";
 
-hls.on(Hls.Events.ERROR, function (event, data) {
+      }).catch(function () {
 
-if (data.fatal) {
+        status.textContent = "Shtyp ▶ te videoja për të nisur LIVE.";
 
-status.textContent =
-"Nuk u lidh me TVIliria LIVE. Provo përsëri.";
+        playButton.style.display = "block";
 
-playButton.style.display = "block";
+      });
 
-}
+    });
 
-});
+    hls.on(Hls.Events.ERROR, function (event, data) {
 
-return;
-}
+      if (data.fatal) {
 
+        status.textContent = "Nuk u lidh me TVIliria LIVE. Provo përsëri.";
 
-if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        playButton.style.display = "block";
 
-video.src = streamURL;
+      }
 
-video.addEventListener("loadedmetadata", function () {
+    });
 
-video.play()
-.then(function () {
+    return;
 
-status.textContent = "🔴 TVIliria LIVE";
+  }
 
-})
-.catch(function () {
+  if (video.canPlayType("application/vnd.apple.mpegurl")) {
 
-status.textContent =
-"Shtyp ▶ te videoja për të nisur LIVE.";
+    video.src = streamURL;
 
-playButton.style.display = "block";
+    video.addEventListener("loadedmetadata", function () {
 
-});
+      video.play().then(function () {
 
-}, { once: true });
+        status.textContent = "🔴 TVIliria LIVE";
 
-return;
-}
+      }).catch(function () {
 
+        status.textContent = "Shtyp ▶ te videoja për të nisur LIVE.";
 
-status.textContent =
-"Shfletuesi nuk mbështet këtë LIVE stream.";
+        playButton.style.display = "block";
 
-playButton.style.display = "block";
+      });
+
+    }, { once: true });
+
+    return;
+
+  }
+
+  status.textContent = "Shfletuesi nuk mbështet këtë LIVE stream.";
+
+  playButton.style.display = "block";
 
 });
-
 
 video.addEventListener("play", function () {
 
-playButton.style.display = "none";
+  playButton.style.display = "none";
 
-status.textContent = "🔴 TVIliria LIVE";
+  status.textContent = "🔴 TVIliria LIVE";
 
 });
-
 
 video.addEventListener("pause", function () {
 
-if (!video.ended) {
+  if (!video.ended) {
 
-status.textContent =
-"LIVE është ndalur. Shtyp Play.";
+    status.textContent = "LIVE është ndalur. Shtyp Play.";
 
-}
+  }
 
 });
 
-
 video.addEventListener("error", function () {
 
-status.textContent =
-"Problem me lidhjen e videos LIVE.";
+  status.textContent = "Problem me lidhjen e videos LIVE.";
 
 });
 
 </script>
 
 </body>
+
 </html>
+
