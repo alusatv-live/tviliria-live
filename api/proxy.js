@@ -7,7 +7,7 @@ const requestedURL = req.query.url || originalURL;
 
 try {
 
-const response = await fetch(requestedURL);
+const response = await fetch(requestedURL); 
 
 if (!response.ok) {
 res.status(response.status).send("Stream error");
