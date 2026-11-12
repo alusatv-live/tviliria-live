@@ -1,13 +1,13 @@
 export default async function handler(req, res) {
 
 const originalURL =
-"https://lbgo.bozztv.com/ssh101/ssh101/albanianusa/chunks.m3u8?lb_backend_hint=7";
+https://183.giatvcdn.com/ssh101/ssh101/alusatv/chunks.m3u8
 
 const requestedURL = req.query.url || originalURL;
 
 try {
 
-const response = await fetch(requestedURL);
+const response = await fetch(requestedURL); 
 
 if (!response.ok) {
 res.status(response.status).send("Stream error");
