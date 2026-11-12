@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
 
 const originalURL =
-"https://lbgo.bozztv.com/ssh101/ssh101/albanianusa/chunks.m3u8?lb_backend_hint=7";
+https://lbgo.bozztv.com/ssh101/ssh101/alusatv/playlist.m3u8
 
 const requestedURL = req.query.url || originalURL;
 
