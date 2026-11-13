@@ -1,0 +1,92 @@
+export default async function handler(req, res) {
+res.setHeader("Access-Control-Allow-Origin", "*");
+res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+res.setHeader("Access-Control-Allow-Headers", "*");
+res.setHeader("Cache-Control", "no-store");
+
+if (req.method === "OPTIONS") {
+return res.status(200).end();
+}
+
+const originalURL =
+"https://183.giatvcdn.com/ssh101/ssh101/alusatv/chunks.m3u8";
+
+const targetURL = req.query.url || originalURL;
+
+let parsedURL;
+
+try {
+parsedURL = new URL(targetURL);
+} catch {
+return res.status(400).send("Invalid URL");
+}
+
+if (
+parsedURL.protocol !== "https:" ||
+!parsedURL.hostname.endsWith("giatvcdn.com")
+) {
+return res.status(403).send("Host not allowed");
+}
+
+try {
+const response = await fetch(parsedURL.toString());
+
+if (!response.ok) {
+return res.status(response.status).send("Stream unavailable");
+}
+
+const contentType =
+response.headers.get("content-type") || "";
+
+if (
+contentType.includes("mpegurl") ||
+parsedURL.pathname.endsWith(".m3u8")
+) {
+let playlist = await response.text();
+
+playlist = playlist.replace(
+/URI="([^"]+)"/g,
+(match, uri) =>
+`URI="${proxyURL(uri, parsedURL)}"`
+);
+
+playlist = playlist
+.split("\n")
+.map(line => {
+const value = line.trim();
+
+if (!value || value.startsWith("#")) {
+return line;
+}
+
+return proxyURL(value, parsedURL);
+})
+.join("\n");
+
+res.setHeader(
+"Content-Type",
+"application/vnd.apple.mpegurl"
+);
+
+return res.status(200).send(playlist);
+}
+
+res.setHeader(
+"Content-Type",
+contentType || "application/octet-stream"
+);
+
+const data = Buffer.from(await response.arrayBuffer());
+
+return res.status(200).send(data);
+
+} catch (error) {
+return res.status(500).send("Proxy error: " + error.message);
+}
+}
+
+function proxyURL(uri, baseURL) {
+const absoluteURL = new URL(uri, baseURL).toString();
+
+return "/api/proxy?url=" + encodeURIComponent(absoluteURL);
+}
